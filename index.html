@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        #searchBar {
+            margin-top: 20px;
+            padding: 10px;
+            width: 300px;
+        }
+        #songList {
+            margin-top: 20px;
+        }
+        .songItem {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #ddd;
+            margin: 5px auto;
+            width: 60%;
+            border-radius: 5px;
+        }
+        .songItem:hover {
+            background-color: #ccc;
+        }
+        audio {
+            margin-top: 20px;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎧 Music Player Website 🎵</h1>
+    <input type="text" id="searchBar" onkeyup="searchSong()" placeholder="Search for a song...">
+    
+    <div id="songList">
+        <div class="songItem" onclick="playSong('song1.mp3')">Song 1 - Artist A</div>
+        <div class="songItem" onclick="playSong('song2.mp3')">Song 2 - Artist B</div>
+        <div class="songItem" onclick="playSong('song3.mp3')">Song 3 - Artist C</div>
+        <div class="songItem" onclick="playSong('song4.mp3')">Song 4 - Artist D</div>
+    </div>
+
+    <audio id="audioPlayer" controls>
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Function to play the selected song
+        function playSong(song) {
+            var player = document.getElementById('audioPlayer');
+            player.src = song;
+            player.play();
+        }
+
+        // Function to search for a song
+        function searchSong() {
+            var input, filter, songs, songItem, i, txtValue;
+            input = document.getElementById('searchBar');
+            filter = input.value.toUpperCase();
+            songs = document.getElementById('songList').getElementsByClassName('songItem');
+
+            for (i = 0; i < songs.length; i++) {
+                songItem = songs[i];
+                txtValue = songItem.textContent || songItem.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    songItem.style.display = "";
+                } else {
+                    songItem.style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
